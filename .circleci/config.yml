@@ -18,7 +18,7 @@ jobs:
           command: PYTHONPATH=. python -m pytest --cov=.
           name: Test
       - run:
-          command: coverage html
+          command: python -m coverage html
           name: Coverage
       - store_artifacts:
           path: htmlcov
