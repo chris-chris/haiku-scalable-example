@@ -3,10 +3,8 @@ Scalable reinforcement learning agents on container orchestration
 
 [![chris-chris](https://circleci.com/gh/chris-chris/haiku-scalable-example.svg?style=shield)](<https://circleci.com/gh/chris-chris/haiku-scalable-example>)
 
-
 ## 1. Purpose of the project
 Implement scalable reinforcement learning agent on the container orchestraion system like k8s.
-We will use Deepmind's open sources like [haiku](https://github.com/deepmind/dm-haiku), [rlax](https://github.com/deepmind/rlax), and google [jax](https://github.com/google/jax)
 
 ## 2. Container Orchestraion
 - [ ] Kubernetes (in-progress)
@@ -50,6 +48,8 @@ $ GRPC_HOST=localhost:50051 python actor_client.py
 - [ ] Multi Learner + Multi Actor IMPALA wiring through gRPC on k8s.
 
 ## 8. Reference
+
+I used Deepmind's open sources [haiku](https://github.com/deepmind/dm-haiku), [rlax](https://github.com/deepmind/rlax), and google [jax](https://github.com/google/jax)
 
 - https://github.com/google/jax
 - https://github.com/deepmind/rlax
