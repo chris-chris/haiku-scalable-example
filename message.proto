@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package message;
+
+// The information service definition.
+service Information{
+  // Sends an ID
+  rpc InsertTrajectory (InsertTrajectoryRequest) returns (InsertTrajectoryReply) {}
+  rpc GetParams (GetParamsRequest) returns (GetParamsReply) {}
+}
+
+message AgentOutput {
+  repeated float policy_logits = 1 [packed=true];
+  repeated float values = 2 [packed=true];
+  repeated int32 action = 3 [packed=true];
+  repeated float agent_state = 4 [packed=true];
+}
+
+message Transition {
+  repeated int32 timestep = 1 [packed=true];
+  repeated float reward = 2 [packed=true];
+  repeated float discount = 3 [packed=true];
+  repeated float observation = 4 [packed=true];
+  AgentOutput agent_output = 5;
+}
+
+message InsertTrajectoryRequest {
+  string trajectory = 1;
+}
+
+message InsertTrajectoryReply {
+  string message = 1;
+}
+
+message GetParamsRequest {
+
+}
+
+message GetParamsReply {
+  int32 frame_count = 1;
+  string params = 2;
+}

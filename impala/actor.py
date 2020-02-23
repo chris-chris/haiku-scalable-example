@@ -101,7 +101,9 @@ class Actor:
         frame_count=frame_count,
         params=params,
         unroll_length=self._unroll_length)
-    self._learner.enqueue_traj(act_out)
+    return act_out
+    # self._learner.enqueue_traj(act_out)
+    # TODO: Actor => Learner InsertTrajectory
 
   def pull_params(self):
     return self._learner.params_for_actor()

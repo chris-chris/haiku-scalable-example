@@ -201,6 +201,7 @@ class Learner:
       # Collect parameters to distribute to downstream actors.
       self._params_for_actor = (num_frames, jax.device_get(params))
 
+
       # Collect and write logs out.
       logs = jax.device_get(logs)
       logs.update({

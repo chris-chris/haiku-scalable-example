@@ -8,3 +8,6 @@ git+https://github.com/deepmind/rlax
 mock==3.0.5
 coverage==5.0.1
 pytest-cov==2.8.1
+grpcio==1.26.0
+grpcio-tools==1.26.0
+protobuf==3.9.2
