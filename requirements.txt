@@ -1,0 +1,4 @@
+dm_haiku==0.0.1a0
+jax==0.1.59
+jaxlib==0.1.39
+dm_env==1.2
