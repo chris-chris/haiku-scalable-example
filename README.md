@@ -24,6 +24,12 @@ This example will introduce a clear way to deploy scalable reinforcement learnin
 
 ## 5. Install
 
+```$bash
+$ git clone https://github.com/chris-chris/haiku-scalable-example
+$ cd haiku-scalable-example
+$ pip install -r requirements.txt
+```
+
 ## 6. Execute
 
 #### v1. Learner + Multi Actor IMPALA wiring through gRPC.
