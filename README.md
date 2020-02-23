@@ -1,7 +1,7 @@
 # haiku-scalable-example
 Scalable reinforcement learning agents on container orchestration
 
-[![chris-chris](https://circleci.com/gh/chris-chris/haiku-scalable-example.svg?style=shield)](<LINK>)
+[![chris-chris](https://circleci.com/gh/chris-chris/haiku-scalable-example.svg?style=shield)](<https://circleci.com/gh/chris-chris/haiku-scalable-example>)
 
 
 ## 1. Purpose of the project
