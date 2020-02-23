@@ -1,6 +1,9 @@
 # haiku-scalable-example
 Scalable reinforcement learning agents on container orchestration
 
+[![chris-chris](https://circleci.com/gh/chris-chris/haiku-scalable-example.svg?style=shield)](<LINK>)
+
+
 ## 1. Purpose of the project
 Implement scalable reinforcement learning agent on the container orchestraion system like k8s.
 We will use Deepmind's open sources like [haiku](https://github.com/deepmind/dm-haiku), [rlax](https://github.com/deepmind/rlax), [jax](https://github.com/google/jax)
