@@ -56,3 +56,4 @@ I used Deepmind's open sources [haiku](https://github.com/deepmind/dm-haiku), [r
 - https://github.com/deepmind/rlax
 - https://github.com/deepmind/haiku
 - https://github.com/kubernetes/kubernetes
+- https://github.com/kent-williams/grpc-python-kubernetes

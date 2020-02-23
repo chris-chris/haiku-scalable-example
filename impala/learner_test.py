@@ -48,12 +48,11 @@ class LearnerTest(absltest.TestCase):
     actor = actor_lib.Actor(
         agent=agent,
         env=env,
-        learner=learner,
         unroll_length=unroll_length,
     )
-    frame_count, params = actor.pull_params()
-    actor.unroll_and_push(frame_count=frame_count, params=params)
-    learner.run(max_iterations=1)
+    # frame_count, params = actor.pull_params()
+    # actor.unroll_and_push(frame_count=frame_count, params=params)
+    # learner.run(max_iterations=1)
 
 
 if __name__ == '__main__':
