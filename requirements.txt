@@ -3,3 +3,5 @@ jax==0.1.59
 jaxlib==0.1.39
 dm_env==1.2
 pytest==5.3.5
+git+https://github.com/deepmind/bsuite.git
+git+https://github.com/deepmind/rlax
