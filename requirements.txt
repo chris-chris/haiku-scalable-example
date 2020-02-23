@@ -6,3 +6,4 @@ pytest
 git+https://github.com/deepmind/bsuite.git
 git+https://github.com/deepmind/rlax
 mock==3.0.5
+coverage==5.0.1
