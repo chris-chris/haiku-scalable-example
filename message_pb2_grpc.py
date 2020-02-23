@@ -24,6 +24,11 @@ class InformationStub(object):
         request_serializer=message__pb2.GetParamsRequest.SerializeToString,
         response_deserializer=message__pb2.GetParamsReply.FromString,
         )
+    self.Quit = channel.unary_unary(
+        '/message.Information/Quit',
+        request_serializer=message__pb2.QuitRequest.SerializeToString,
+        response_deserializer=message__pb2.QuitReply.FromString,
+        )
 
 
 class InformationServicer(object):
@@ -44,6 +49,13 @@ class InformationServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Quit(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_InformationServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -56,6 +68,11 @@ def add_InformationServicer_to_server(servicer, server):
           servicer.GetParams,
           request_deserializer=message__pb2.GetParamsRequest.FromString,
           response_serializer=message__pb2.GetParamsReply.SerializeToString,
+      ),
+      'Quit': grpc.unary_unary_rpc_method_handler(
+          servicer.Quit,
+          request_deserializer=message__pb2.QuitRequest.FromString,
+          response_serializer=message__pb2.QuitReply.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

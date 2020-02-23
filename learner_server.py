@@ -126,7 +126,7 @@ def main(_):
   learner.run(int(max_updates))
 
   try:
-    while True:
+    while not learner._done:
       time.sleep(1)
   except KeyboardInterrupt:
     server.stop(0)

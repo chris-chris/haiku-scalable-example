@@ -37,7 +37,8 @@ $ python learner_server.py
 ```
 
 ```$bash
-$ GRPC_HOST=localhost:50051 python actor_client.py
+$ GRPC_HOST=localhost:50051 python actor_client.py &
+$ GRPC_HOST=localhost:50051 python actor_client.py &
 ```
 
 ## 7. To-dos

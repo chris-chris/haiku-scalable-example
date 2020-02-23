@@ -31,14 +31,14 @@ class Actor:
       agent: agent_lib.Agent,
       env: dm_env.Environment,
       unroll_length: int,
-      learner: learner_lib.Learner,
+      # learner: learner_lib.Learner,
       rng_seed: int = 42,
       logger=None,
   ):
     self._agent = agent
     self._env = env
     self._unroll_length = unroll_length
-    self._learner = learner
+    # self._learner = learner
     self._timestep = env.reset()
     self._agent_state = agent.initial_state(None)
     self._traj = []
@@ -105,5 +105,5 @@ class Actor:
     # self._learner.enqueue_traj(act_out)
     # TODO: Actor => Learner InsertTrajectory
 
-  def pull_params(self):
-    return self._learner.params_for_actor()
+  # def pull_params(self):
+  #   return self._learner.params_for_actor()

@@ -7,21 +7,7 @@ service Information{
   // Sends an ID
   rpc InsertTrajectory (InsertTrajectoryRequest) returns (InsertTrajectoryReply) {}
   rpc GetParams (GetParamsRequest) returns (GetParamsReply) {}
-}
-
-message AgentOutput {
-  repeated float policy_logits = 1 [packed=true];
-  repeated float values = 2 [packed=true];
-  repeated int32 action = 3 [packed=true];
-  repeated float agent_state = 4 [packed=true];
-}
-
-message Transition {
-  repeated int32 timestep = 1 [packed=true];
-  repeated float reward = 2 [packed=true];
-  repeated float discount = 3 [packed=true];
-  repeated float observation = 4 [packed=true];
-  AgentOutput agent_output = 5;
+  rpc Quit (QuitRequest) returns (QuitReply) {}
 }
 
 message InsertTrajectoryRequest {
@@ -33,6 +19,14 @@ message InsertTrajectoryReply {
 }
 
 message GetParamsRequest {
+
+}
+
+message QuitRequest {
+
+}
+
+message QuitReply {
 
 }
 

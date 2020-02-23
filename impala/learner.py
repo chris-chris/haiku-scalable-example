@@ -211,5 +211,6 @@ class Learner:
 
     # Shut down.
     self._done = True
+
     self._logger.close()
     transfer_thread.join()

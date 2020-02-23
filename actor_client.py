@@ -61,10 +61,11 @@ def ndarray_decoder(dct):
 
 def run_actor(actor: actor_lib.Actor, stop_signal: List[bool]):
   host = os.getenv("GRPC_HOST", "localhost:50051")
+  # print(host)
   channel = grpc.insecure_channel(host)
   stub = message_pb2_grpc.InformationStub(channel)
   """Runs an actor to produce num_trajectories trajectories."""
-  while not stop_signal[0]:
+  while True:
 
     param_result = stub.GetParams(message_pb2.GetParamsRequest())
     frame_count = param_result.frame_count
@@ -95,16 +96,16 @@ def main(_):
   opt = optix.rmsprop(1e-1, decay=0.99, eps=0.1)
 
   # Construct the learner.
-  learner = learner_lib.Learner(
-      agent,
-      jax.random.PRNGKey(428),
-      opt,
-      BATCH_SIZE,
-      DISCOUNT_FACTOR,
-      FRAMES_PER_ITER,
-      max_abs_reward=1.,
-      logger=util.AbslLogger(),  # Provide your own logger here.
-  )
+  # learner = learner_lib.Learner(
+  #     agent,
+  #     jax.random.PRNGKey(428),
+  #     opt,
+  #     BATCH_SIZE,
+  #     DISCOUNT_FACTOR,
+  #     FRAMES_PER_ITER,
+  #     max_abs_reward=1.,
+  #     logger=util.AbslLogger(),  # Provide your own logger here.
+  # )
 
   # Construct the actors on different threads.
   # stop_signal in a list so the reference is shared.
@@ -115,7 +116,6 @@ def main(_):
         agent,
         build_env(),
         UNROLL_LENGTH,
-        learner,
         rng_seed=i,
         logger=util.AbslLogger(),  # Provide your own logger here.
     )
@@ -125,10 +125,10 @@ def main(_):
   # Start the actors and learner.
   for t in actor_threads:
     t.start()
-  learner.run(int(max_updates))
+  # learner.run(int(max_updates))
 
   # Stop.
-  stop_signal[0] = True
+  # stop_signal[0] = True
   for t in actor_threads:
     t.join()
 
