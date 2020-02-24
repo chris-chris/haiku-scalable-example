@@ -20,6 +20,9 @@ jobs:
       - run:
           command: python -m coverage html
           name: Coverage
+      - run:
+          command: python -m coveralls
+          name: Coverage Submit
       - store_artifacts:
           path: htmlcov
           destination: coverage
