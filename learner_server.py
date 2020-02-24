@@ -115,7 +115,7 @@ def setup_server(learner):
   return server
 
 
-def main(_):
+def main(_): # pragma: no cover
 
   max_updates = MAX_ENV_FRAMES / FRAMES_PER_ITER
   learner = setup_learner()
@@ -129,5 +129,5 @@ def main(_):
   except KeyboardInterrupt:
     server.stop(0)
 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
   app.run(main)

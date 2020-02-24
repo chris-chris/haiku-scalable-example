@@ -55,7 +55,7 @@ class CatchNet(hk.RNNCore):
     return out, state
 
 
-class AtariShallowTorso(hk.Module):
+class AtariShallowTorso(hk.Module): # pragma: no cover
   """Shallow torso for Atari, from the DQN paper."""
 
   def __init__(self, name=None):
@@ -77,7 +77,7 @@ class AtariShallowTorso(hk.Module):
     return torso_net(x)
 
 
-class ResidualBlock(hk.Module):
+class ResidualBlock(hk.Module): # pragma: no cover
   """Residual block."""
 
   def __init__(self, num_channels, name=None):
@@ -102,7 +102,7 @@ class ResidualBlock(hk.Module):
     return main_branch(x) + x
 
 
-class AtariDeepTorso(hk.Module):
+class AtariDeepTorso(hk.Module): # pragma: no cover
   """Deep torso for Atari, from the IMPALA paper."""
 
   def __init__(self, name=None):
@@ -131,7 +131,7 @@ class AtariDeepTorso(hk.Module):
     return torso_out
 
 
-class AtariNet(hk.RNNCore):
+class AtariNet(hk.RNNCore): # pragma: no cover
   """Network for Atari."""
 
   def __init__(self, num_actions, use_resnet, use_lstm, name=None):

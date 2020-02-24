@@ -90,7 +90,7 @@ def setup_actors(num_actors):
     actor_threads.append(threading.Thread(target=run_actor, args=args))
   return actor_threads
 
-def main(_):
+def main(_): # pragma: no cover
   actor_threads = setup_actors(NUM_ACTORS)
 
   # Start the actors and learner.
@@ -102,5 +102,5 @@ def main(_):
     t.join()
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
   app.run(main)
