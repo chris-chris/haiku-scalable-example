@@ -25,8 +25,3 @@ class ActorClientTest(absltest.TestCase):
     num_actors = 2
     actor_threads = actor_client.setup_actors(num_actors)
     self.assertEqual(len(actor_threads), num_actors)
-
-
-
-
-
