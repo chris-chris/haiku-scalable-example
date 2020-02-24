@@ -7,7 +7,7 @@ jobs:
 
   build-and-test:
     docker:
-      - image: chrisai/haiku-scalable-example-base:test
+      - image: chrisai/haiku-scalable-example-base:latest
     executor: python/default
     steps:
       - checkout
@@ -21,7 +21,7 @@ jobs:
           command: python -m coverage html
           name: Coverage
       - run:
-          command: python -m coveralls
+          command: COVERALLS_REPO_TOKEN=uzR6LezWHZjXDf2LpaxMOBmFq2vcgmDmm python -m coveralls
           name: Coverage Submit
       - store_artifacts:
           path: htmlcov
