@@ -15,29 +15,26 @@
 # ==============================================================================
 """Single-process IMPALA wiring."""
 
-import threading
-from typing import List
+from concurrent import futures
+import time
+import json
 
+import grpc
 import dm_env
 from absl import app
+import numpy as np
+import jax
+from jax.experimental import optix
+from haiku._src.data_structures import to_mutable_dict
 from bsuite.experiments.catch import catch
-from impala import actor as actor_lib
+
 from impala import agent as agent_lib
 from impala import haiku_nets
 from impala import learner as learner_lib
 from impala import util
-import jax
-from jax.experimental import optix
-
-from haiku._src.data_structures import to_mutable_dict
-
-from concurrent import futures
-import time
-import grpc
 import message_pb2
 import message_pb2_grpc
-import json
-import numpy as np
+
 
 ACTION_REPEAT = 1
 BATCH_SIZE = 2
@@ -48,48 +45,37 @@ UNROLL_LENGTH = 20
 
 FRAMES_PER_ITER = ACTION_REPEAT * BATCH_SIZE * UNROLL_LENGTH
 
-class NumpyEncoder(json.JSONEncoder):
-  def default(self, obj):
-    if isinstance(obj, np.ndarray):
-      return obj.tolist()
-    return json.JSONEncoder.default(self, obj)
-
-def ndarray_decoder(dct):
-  if isinstance(dct, dict):
-    for key in dct.keys():
-      dct[key] = ndarray_decoder(dct[key])
-  elif isinstance(dct, list):
-    return np.array(dct)
-  return dct
-
 class Information(message_pb2_grpc.InformationServicer):
+  """gRPC protocol interface"""
   def __init__(self, learner):
     self.learner = learner
 
   def InsertTrajectory(self, request, context):
-    # print(request)
-    trajectory = json.loads(request.trajectory, object_hook=ndarray_decoder)
-    traj = util.Transition(timestep=dm_env.TimeStep(
-        step_type=np.array(trajectory[0][0]),
-        reward=np.array(trajectory[0][1]),
-        observation=np.array(trajectory[0][3]),
-        discount=np.array(trajectory[0][2])
-    ),
-        agent_out=agent_lib.AgentOutput(
+    trajectory = json.loads(request.trajectory,
+                            object_hook=util.ndarray_decoder)
+    traj = util.Transition(
+        timestep=dm_env.TimeStep(
+            step_type=np.array(trajectory[0][0]),
+            reward=np.array(trajectory[0][1]),
+            observation=np.array(trajectory[0][3]),
+            discount=np.array(trajectory[0][2])
+        ), agent_out=agent_lib.AgentOutput(
             policy_logits=np.array(trajectory[1][0]),
             action=np.array(trajectory[1][2]),
             values=np.array(trajectory[1][1])
         ),
-        agent_state=np.array(trajectory[2]))
+        agent_state=np.array(trajectory[2])
+    )
     self.learner.enqueue_traj(traj)
     return message_pb2.InsertTrajectoryReply(message='ID: %s' % id)
 
   def GetParams(self, request, context):
     frame_count, params = self.learner.params_for_actor()
     mutable_params = to_mutable_dict(params)
-    params_json = json.dumps(mutable_params, cls=NumpyEncoder)
+    params_json = json.dumps(mutable_params, cls=util.NumpyEncoder)
 
-    return message_pb2.GetParamsReply(frame_count=frame_count, params=params_json)
+    return message_pb2.GetParamsReply(frame_count=frame_count,
+                                      params=params_json)
 
 def main(_):
   # A thunk that builds a new environment.
@@ -119,18 +105,18 @@ def main(_):
   )
 
   server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-  message_pb2_grpc.add_InformationServicer_to_server(Information(learner), server)
+  message_pb2_grpc.add_InformationServicer_to_server(Information(learner),
+                                                     server)
   server.add_insecure_port('[::]:50051')
   server.start()
 
   learner.run(int(max_updates))
 
   try:
-    while not learner._done:
+    while not learner.is_done():
       time.sleep(1)
   except KeyboardInterrupt:
     server.stop(0)
-
 
 if __name__ == '__main__':
   app.run(main)

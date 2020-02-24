@@ -15,6 +15,7 @@
 # ==============================================================================
 """Util."""
 import collections
+import json
 
 from absl import logging
 import dm_env
@@ -58,3 +59,17 @@ class AbslLogger:
 
   def close(self):
     pass
+
+class NumpyEncoder(json.JSONEncoder):
+  def default(self, o):
+    if isinstance(o, np.ndarray):
+      return o.tolist()
+    return json.JSONEncoder.default(self, o)
+
+def ndarray_decoder(dct):
+  if isinstance(dct, dict):
+    for key in dct.keys():
+      dct[key] = ndarray_decoder(dct[key])
+  elif isinstance(dct, list):
+    return np.array(dct)
+  return dct

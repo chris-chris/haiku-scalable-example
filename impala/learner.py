@@ -85,6 +85,9 @@ class Learner:
       logger = util.NullLogger()
     self._logger = logger
 
+  def is_done(self):
+    return self._done
+
   def _loss(
       self,
       theta: hk.Params,
