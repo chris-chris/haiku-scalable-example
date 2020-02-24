@@ -77,7 +77,7 @@ class Information(message_pb2_grpc.InformationServicer):
     return message_pb2.GetParamsReply(frame_count=frame_count,
                                       params=params_json)
 
-def main(_):
+def setup_learner():
   # A thunk that builds a new environment.
   # Substitute your environment here!
   build_env = catch.Catch
@@ -89,7 +89,6 @@ def main(_):
                           haiku_nets.CatchNet)
 
   # Construct the optimizer.
-  max_updates = MAX_ENV_FRAMES / FRAMES_PER_ITER
   opt = optix.rmsprop(1e-1, decay=0.99, eps=0.1)
 
   # Construct the learner.
@@ -103,13 +102,23 @@ def main(_):
       max_abs_reward=1.,
       logger=util.AbslLogger(),  # Provide your own logger here.
   )
+  return learner
+
+def setup_server(learner):
 
   server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
   message_pb2_grpc.add_InformationServicer_to_server(Information(learner),
                                                      server)
   server.add_insecure_port('[::]:50051')
-  server.start()
+  return server
 
+
+def main(_):
+
+  max_updates = MAX_ENV_FRAMES / FRAMES_PER_ITER
+  learner = setup_learner()
+  server = setup_server(learner)
+  server.start()
   learner.run(int(max_updates))
 
   try:
