@@ -1,0 +1,6 @@
+[run]
+omit =
+    # dd
+    *pb2.py
+    *pb2_grpc.py
+    *_test.py

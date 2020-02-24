@@ -15,7 +15,7 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: PYTHONPATH=. python -m pytest --cov=.
+          command: PYTHONPATH=. python -m pytest --cov-config=.coveragerc --cov=.
           name: Test
       - run:
           command: python -m coverage html
