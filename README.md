@@ -41,12 +41,34 @@ $ GRPC_HOST=localhost:50051 python actor_client.py &
 $ GRPC_HOST=localhost:50051 python actor_client.py &
 ```
 
+#### v2. 1 Learner + Multi Actor IMPALA wiring through gRPC on docker VMs.
+
+prepare
+```bash
+$ docker pull chrisai/haiku-scalable-example-learner:test
+$ docker pull chrisai/haiku-scalable-example-actor:test
+
+$ docker network create --subnet 172.20.0.0/16 --ip-range 172.20.240.0/20 multi-host-network
+```
+
+run
+```bash
+$ docker run -d -p 127.0.0.1:50051:50051 --network=multi-host-network --ip=172.20.240.1 chrisai/haiku-scalable-example-learner:test
+$ docker run -d --env GRPC_HOST=172.20.240.1:50051 --network=multi-host-network chrisai/haiku-scalable-example-actor:test
+```
+
+wanna see logs?
+```bash
+$ docker ps
+$ docker attach [CONTAINER ID]
+```
+
 ## 7. To-dos
 
-- [x] 1 Learner + Multi Actor IMPALA wiring through gRPC.
-- [ ] 1 Learner + Multi Actor IMPALA wiring through gRPC on docker VMs.
-- [ ] 1 Learner + Multi Actor IMPALA wiring through gRPC on k8s.
-- [ ] Multi Learner + Multi Actor IMPALA wiring through gRPC on k8s.
+- [x] v1. 1 Learner + Multi Actor IMPALA wiring through gRPC.
+- [x] v2. 1 Learner + Multi Actor IMPALA wiring through gRPC on docker VMs.
+- [ ] v3. 1 Learner + Multi Actor IMPALA wiring through gRPC on k8s. (in-progress)
+- [ ] v4. Multi Learner + Multi Actor IMPALA wiring through gRPC on k8s.
 
 ## 8. Reference
 

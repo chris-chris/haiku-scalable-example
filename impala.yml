@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: impala-pod
+  labels:
+    app: impala
+spec:
+  containers:
+    - name: impala-learner
+      image: chrisai/haiku-scalable-example-learner:test
+    - name: impala-actor
+      image: chrisai/haiku-scalable-example-actor:test
+      env:
+      - name: GRPC_HOST
+        value: localhost:50051
+subjects:
+  - kind: User
+    name: kube-apiserver-kubelet-client
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: system:kubelet-api-admin
+  apiGroup: rbac.authorization.k8s.io
