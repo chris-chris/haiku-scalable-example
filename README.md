@@ -8,12 +8,12 @@ Scalable reinforcement learning agents on container orchestration
 Implement scalable reinforcement learning agent on the container orchestraion system like k8s.
 
 ## 2. Container Orchestraion
-- [x] Kubernetes (in-progress)
+- [x] Kubernetes
 - [ ] Slurm
 - [ ] Google Cloud Platform
 
 ## 3. Reinforcement Learning Algorithms
-- [x] IMPALA (in-progress)
+- [x] IMPALA
 - [ ] TBD
 
 ## 4. Architecture
@@ -65,11 +65,28 @@ $ docker ps
 $ docker attach [CONTAINER ID]
 ```
 
+#### v3. 1 Learner + Multi Actor IMPALA wiring through gRPC on k8s.
+
+- Install minikube
+
+https://kubernetes.io/docs/tasks/tools/install-minikube/
+
+- Run
+```bash
+$ kubectl apply -f impala.yml
+```
+
+- Wanna see logs?
+```bash
+$ kubectl logs -f impala learner
+$ kubectl logs -f impala actor
+```
+
 ## 7. To-dos
 
 - [x] v1. 1 Learner + Multi Actor IMPALA wiring through gRPC.
 - [x] v2. 1 Learner + Multi Actor IMPALA wiring through gRPC on docker VMs.
-- [ ] v3. 1 Learner + Multi Actor IMPALA wiring through gRPC on k8s. (in-progress)
+- [x] v3. 1 Learner + Multi Actor IMPALA wiring through gRPC on k8s.
 - [ ] v4. Multi Learner + Multi Actor IMPALA wiring through gRPC on k8s.
 - [ ] Optimize the model weight serialization for the performance.
 - [ ] Implement other distributed RL algorithms
