@@ -78,6 +78,7 @@ class Information(message_pb2_grpc.InformationServicer):
                                       params=params_json)
 
 def setup_learner():
+  """Setup learner for distributed setting"""
   # A thunk that builds a new environment.
   # Substitute your environment here!
   build_env = catch.Catch
@@ -105,6 +106,7 @@ def setup_learner():
   return learner
 
 def setup_server(learner):
+  """Setup gRPC server for the communication between learners and actors."""
 
   server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
   message_pb2_grpc.add_InformationServicer_to_server(Information(learner),
