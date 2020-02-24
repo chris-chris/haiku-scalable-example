@@ -62,7 +62,8 @@ def run_actor(actor: actor_lib.Actor):
         trajectory=t_obj
     ))
 
-def main(_):
+def setup_actors(num_actors):
+  """Setup actor threads for the execution."""
   # A thunk that builds a new environment.
   # Substitute your environment here!
   build_env = catch.Catch
@@ -77,7 +78,7 @@ def main(_):
   # stop_signal in a list so the reference is shared.
   actor_threads = []
   stop_signal = [False]
-  for i in range(NUM_ACTORS):
+  for i in range(num_actors):
     actor = actor_lib.Actor(
         agent,
         build_env(),
@@ -87,13 +88,16 @@ def main(_):
     )
     args = (actor, stop_signal)
     actor_threads.append(threading.Thread(target=run_actor, args=args))
+  return actor_threads
+
+def main(_):
+  actor_threads = setup_actors(NUM_ACTORS)
 
   # Start the actors and learner.
   for t in actor_threads:
     t.start()
 
   # Stop.
-  # stop_signal[0] = True
   for t in actor_threads:
     t.join()
 
