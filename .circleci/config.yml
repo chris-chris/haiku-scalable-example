@@ -18,11 +18,14 @@ jobs:
           command: PYTHONPATH=. python -m pytest --cov-config=.coveragerc --cov=.
           name: Test
       - run:
-          command: python -m coverage html
-          name: Coverage
+          command: PYTHONPATH=. python -m pylint --ignore=message_pb2.py,message_pb2_grpc.py *.py
+          name: Lint
       - run:
           command: COVERALLS_REPO_TOKEN=uzR6LezWHZjXDf2LpaxMOBmFq2vcgmDmm python -m coveralls
           name: Coverage Submit
+      - run:
+          command: python -m coverage html
+          name: Coverage
       - store_artifacts:
           path: htmlcov
           destination: coverage
