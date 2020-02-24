@@ -12,3 +12,4 @@ grpcio==1.26.0
 grpcio-tools==1.26.0
 protobuf==3.9.2
 coveralls==1.11.1
+pylint==2.3.1
