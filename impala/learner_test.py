@@ -50,10 +50,10 @@ class LearnerTest(absltest.TestCase):
         env=env,
         unroll_length=unroll_length,
     )
-    # frame_count, params = actor.pull_params()
-    # actor.unroll_and_push(frame_count=frame_count, params=params)
-    # learner.run(max_iterations=1)
-
+    frame_count, params = learner.params_for_actor()
+    act_out = actor.unroll_and_push(frame_count=frame_count, params=params)
+    learner.enqueue_traj(act_out)
+    learner.run(max_iterations=1)
 
 if __name__ == '__main__':
   absltest.main()
