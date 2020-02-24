@@ -2,17 +2,19 @@
 Scalable reinforcement learning agents on container orchestration
 
 [![chris-chris](https://circleci.com/gh/chris-chris/haiku-scalable-example.svg?style=shield)](<https://circleci.com/gh/chris-chris/haiku-scalable-example>)
+[![Coverage Status](https://coveralls.io/repos/github/chris-chris/haiku-scalable-example/badge.svg?branch=master)](https://coveralls.io/github/chris-chris/haiku-scalable-example?branch=master)
 
 ## 1. Purpose of the project
 Implement scalable reinforcement learning agent on the container orchestraion system like k8s.
 
 ## 2. Container Orchestraion
-- [ ] Kubernetes (in-progress)
+- [x] Kubernetes (in-progress)
 - [ ] Slurm
 - [ ] Google Cloud Platform
 
 ## 3. Reinforcement Learning Algorithms
 - [x] IMPALA (in-progress)
+- [ ] TBD
 
 ## 4. Architecture
 
@@ -69,6 +71,8 @@ $ docker attach [CONTAINER ID]
 - [x] v2. 1 Learner + Multi Actor IMPALA wiring through gRPC on docker VMs.
 - [ ] v3. 1 Learner + Multi Actor IMPALA wiring through gRPC on k8s. (in-progress)
 - [ ] v4. Multi Learner + Multi Actor IMPALA wiring through gRPC on k8s.
+- [ ] Optimize the model weight serialization for the performance.
+- [ ] Implement other distributed RL algorithms
 
 ## 8. Reference
 
