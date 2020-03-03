@@ -50,6 +50,7 @@ class Information(message_pb2_grpc.InformationServicer):
   def __init__(self, learner):
     self.learner = learner
 
+  # TODO: Optimize trajectory serialization
   def InsertTrajectory(self, request, context):
     trajectory = json.loads(request.trajectory,
                             object_hook=util.ndarray_decoder)
