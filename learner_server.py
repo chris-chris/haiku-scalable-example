@@ -50,33 +50,18 @@ class Information(message_pb2_grpc.InformationServicer):
   def __init__(self, learner):
     self.learner = learner
 
-  # TODO: Optimize trajectory serialization
-  def InsertTrajectory(self, request, context):
-    trajectory = json.loads(request.trajectory,
-                            object_hook=util.ndarray_decoder)
-    traj = util.Transition(
-        timestep=dm_env.TimeStep(
-            step_type=np.array(trajectory[0][0]),
-            reward=np.array(trajectory[0][1]),
-            observation=np.array(trajectory[0][3]),
-            discount=np.array(trajectory[0][2])
-        ), agent_out=agent_lib.AgentOutput(
-            policy_logits=np.array(trajectory[1][0]),
-            action=np.array(trajectory[1][2]),
-            values=np.array(trajectory[1][1])
-        ),
-        agent_state=np.array(trajectory[2])
-    )
+  def InsertTrajectory2(self, request, context):
+    traj = util.proto3_decoder(request)
     self.learner.enqueue_traj(traj)
-    return message_pb2.InsertTrajectoryReply(message='ID: %s' % id)
+    return message_pb2.InsertTrajectoryReply(message='Inserted!')
 
   def GetParams(self, request, context):
     frame_count, params = self.learner.params_for_actor()
-    mutable_params = to_mutable_dict(params)
-    params_json = json.dumps(mutable_params, cls=util.NumpyEncoder)
+    # mutable_params = to_mutable_dict(params)
+    # params_json = json.dumps(mutable_params, cls=util.NumpyEncoder)
+    encoded = util.proto3_weight_encoder(frame_count, params)
+    return encoded
 
-    return message_pb2.GetParamsReply(frame_count=frame_count,
-                                      params=params_json)
 
 def setup_learner():
   """Setup learner for distributed setting"""

@@ -21,6 +21,11 @@ from absl import logging
 import dm_env
 import numpy as np
 import tree
+from dm_env import TimeStep
+
+from haiku._src.data_structures import to_immutable_dict
+from impala import agent as agent_lib
+import message_pb2
 
 # Can represent either a single transition, a trajectory, or a batch of
 # trajectories.
@@ -73,3 +78,95 @@ def ndarray_decoder(dct):
   elif isinstance(dct, list):
     return np.array(dct)
   return dct
+
+
+def tensor_int(tensor):
+  return message_pb2.TensorInt32(data=tensor.flatten(),
+                                 shape=tensor.shape)
+
+
+def tensor_float(tensor):
+  return message_pb2.TensorFloat(data=tensor.flatten(),
+                                 shape=tensor.shape)
+
+
+def tensor_int_decoder(tensor):
+  data = np.array(tensor.data, dtype=np.int)
+  data = data.reshape(tensor.shape)
+  return data
+
+
+def tensor_float_decoder(tensor):
+  data = np.array(tensor.data, dtype=np.float)
+  data = data.reshape(tensor.shape)
+  return data
+
+
+def proto3_encoder(trajectory):
+  return message_pb2.InsertTrajectoryRequest2(
+      agent_out=message_pb2.AgentOut(
+          action=tensor_int(trajectory.agent_out.action),
+          policy_logits=tensor_float(trajectory.agent_out.policy_logits),
+          values=tensor_float(trajectory.agent_out.values),
+      ),
+      agent_state=tensor_float(trajectory.agent_state),
+      timestep=message_pb2.Timestep(
+          discount=tensor_float(trajectory.timestep.discount),
+          observation=tensor_float(trajectory.timestep.observation),
+          reward=tensor_float(trajectory.timestep.reward),
+          step_type=tensor_int(trajectory.timestep.step_type),
+      )
+  )
+
+def proto3_decoder(trajectory):
+  decoded = Transition(
+      agent_out=agent_lib.AgentOutput(
+          action=tensor_int_decoder(trajectory.agent_out.action),
+          policy_logits=tensor_float_decoder(trajectory.agent_out.policy_logits),
+          values=tensor_int_decoder(trajectory.agent_out.values),
+      ),
+      agent_state=tensor_float_decoder(trajectory.agent_state),
+      timestep=TimeStep(
+          discount=tensor_float_decoder(trajectory.timestep.discount),
+          observation=tensor_float_decoder(trajectory.timestep.observation),
+          reward=tensor_float_decoder(trajectory.timestep.reward),
+          step_type=tensor_int_decoder(trajectory.timestep.step_type),
+      )
+  )
+  return decoded
+
+
+def encode_layer_weight(params):
+  layers = []
+  for key in params:
+    layer = message_pb2.LayerWeight(
+        name=key,
+        b=tensor_float(params[key]['b']),
+        w=tensor_float(params[key]['w']),
+    )
+    layers.append(layer)
+  return layers
+
+
+def decode_layer_weight(layers):
+  data = {}
+  for layer in layers:
+    data[layer.name] = to_immutable_dict({
+      "b": tensor_float_decoder(layer.b),
+      "w": tensor_float_decoder(layer.w)
+    })
+  return to_immutable_dict(data)
+
+
+def proto3_weight_encoder(frame_count, params):
+  layer_weights = encode_layer_weight(params)
+  return message_pb2.ModelParams(
+      frame_count=frame_count,
+      params=layer_weights
+  )
+
+
+def proto3_weight_decoder(model_params):
+  frame_count = model_params.frame_count
+  params = decode_layer_weight(model_params.params)
+  return frame_count, params

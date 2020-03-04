@@ -19,10 +19,15 @@ class InformationStub(object):
         request_serializer=message__pb2.InsertTrajectoryRequest.SerializeToString,
         response_deserializer=message__pb2.InsertTrajectoryReply.FromString,
         )
+    self.InsertTrajectory2 = channel.unary_unary(
+        '/message.Information/InsertTrajectory2',
+        request_serializer=message__pb2.InsertTrajectoryRequest2.SerializeToString,
+        response_deserializer=message__pb2.InsertTrajectoryReply.FromString,
+        )
     self.GetParams = channel.unary_unary(
         '/message.Information/GetParams',
         request_serializer=message__pb2.GetParamsRequest.SerializeToString,
-        response_deserializer=message__pb2.GetParamsReply.FromString,
+        response_deserializer=message__pb2.ModelParams.FromString,
         )
     self.Quit = channel.unary_unary(
         '/message.Information/Quit',
@@ -38,6 +43,13 @@ class InformationServicer(object):
   def InsertTrajectory(self, request, context):
     """Sends an ID
     """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def InsertTrajectory2(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -64,10 +76,15 @@ def add_InformationServicer_to_server(servicer, server):
           request_deserializer=message__pb2.InsertTrajectoryRequest.FromString,
           response_serializer=message__pb2.InsertTrajectoryReply.SerializeToString,
       ),
+      'InsertTrajectory2': grpc.unary_unary_rpc_method_handler(
+          servicer.InsertTrajectory2,
+          request_deserializer=message__pb2.InsertTrajectoryRequest2.FromString,
+          response_serializer=message__pb2.InsertTrajectoryReply.SerializeToString,
+      ),
       'GetParams': grpc.unary_unary_rpc_method_handler(
           servicer.GetParams,
           request_deserializer=message__pb2.GetParamsRequest.FromString,
-          response_serializer=message__pb2.GetParamsReply.SerializeToString,
+          response_serializer=message__pb2.ModelParams.SerializeToString,
       ),
       'Quit': grpc.unary_unary_rpc_method_handler(
           servicer.Quit,

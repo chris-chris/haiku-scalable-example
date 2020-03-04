@@ -5,18 +5,19 @@ package message;
 // The information service definition.
 service Information{
   // Sends an ID
-  rpc InsertTrajectory (InsertTrajectoryRequest) returns (InsertTrajectoryReply) {}
-  rpc GetParams (GetParamsRequest) returns (GetParamsReply) {}
+  // rpc InsertTrajectory (InsertTrajectoryRequest) returns (InsertTrajectoryReply) {}
+  rpc InsertTrajectory2 (InsertTrajectoryRequest2) returns (InsertTrajectoryReply) {}
+  rpc GetParams (GetParamsRequest) returns (ModelParams) {}
   rpc Quit (QuitRequest) returns (QuitReply) {}
 }
 
-message InsertTrajectoryRequest {
-  string trajectory = 1;
-}
-
-message InsertTrajectoryReply {
-  string message = 1;
-}
+//message InsertTrajectoryRequest {
+//  string trajectory = 1;
+//}
+//
+//message InsertTrajectoryReply {
+//  string message = 1;
+//}
 
 message GetParamsRequest {
 
@@ -33,4 +34,54 @@ message QuitReply {
 message GetParamsReply {
   int32 frame_count = 1;
   string params = 2;
+}
+
+message AgentOut {
+  TensorInt32 action = 1;
+  TensorFloat policy_logits = 2;
+  TensorFloat values = 3;
+}
+
+message Timestep {
+  TensorFloat discount = 1;
+  TensorFloat observation = 2;
+  TensorFloat reward = 3;
+  TensorInt32 step_type = 4;
+}
+
+message TensorFloat {
+  repeated float data = 1;
+  repeated int32 shape = 2;
+}
+
+message TensorInt32 {
+  repeated float data = 1;
+  repeated int32 shape = 2;
+}
+
+message NamedTuple {
+  repeated float TensorFloat = 1;
+}
+
+message InsertTrajectoryRequest2 {
+  AgentOut agent_out = 1;
+  TensorFloat agent_state = 2;
+  Timestep timestep = 3;
+}
+
+message InsertTrajectoryRequest3 {
+  repeated NamedTuple agent_out = 1;
+  TensorFloat agent_state = 2;
+  Timestep timestep = 3;
+}
+
+message LayerWeight {
+  string name = 1;
+  TensorFloat b = 2;
+  TensorFloat w = 3;
+}
+
+message ModelParams {
+  int32 frame_count = 1;
+  repeated LayerWeight params = 2;
 }

@@ -17,10 +17,8 @@
 
 import threading
 import os
-import json
 
 from absl import app
-from haiku._src.data_structures import to_immutable_dict
 import grpc
 from bsuite.experiments.catch import catch
 
@@ -43,24 +41,18 @@ FRAMES_PER_ITER = ACTION_REPEAT * BATCH_SIZE * UNROLL_LENGTH
 def run_actor(actor: actor_lib.Actor):
   """Runs an actor to produce num_trajectories trajectories."""
   host = os.getenv("GRPC_HOST", "localhost:50051")
-  # print(host)
+
   channel = grpc.insecure_channel(host)
   stub = message_pb2_grpc.InformationStub(channel)
 
   while True:
 
     param_result = stub.GetParams(message_pb2.GetParamsRequest())
-    frame_count = param_result.frame_count
-    params = param_result.params
-    params_obj = json.loads(params, object_hook=util.ndarray_decoder)
-    params_frozen = to_immutable_dict(params_obj)
+    frame_count, params = util.proto3_weight_decoder(model_params=param_result)
 
-    trajectories = actor.unroll_and_push(frame_count, params_frozen)
-    t_obj = json.dumps(trajectories, cls=util.NumpyEncoder)
-
-    stub.InsertTrajectory(message_pb2.InsertTrajectoryRequest(
-        trajectory=t_obj
-    ))
+    trajectories = actor.unroll_and_push(frame_count, params)
+    stub.InsertTrajectory2(
+        util.proto3_encoder(trajectories))
 
 def setup_actors(num_actors):
   """Setup actor threads for the execution."""
@@ -77,7 +69,6 @@ def setup_actors(num_actors):
   # Construct the actors on different threads.
   # stop_signal in a list so the reference is shared.
   actor_threads = []
-  stop_signal = [False]
   for i in range(num_actors):
     actor = actor_lib.Actor(
         agent,
@@ -86,7 +77,7 @@ def setup_actors(num_actors):
         rng_seed=i,
         logger=util.AbslLogger(),  # Provide your own logger here.
     )
-    args = (actor, stop_signal)
+    args = (actor, )
     actor_threads.append(threading.Thread(target=run_actor, args=args))
   return actor_threads
 
