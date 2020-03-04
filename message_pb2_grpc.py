@@ -16,12 +16,7 @@ class InformationStub(object):
     """
     self.InsertTrajectory = channel.unary_unary(
         '/message.Information/InsertTrajectory',
-        request_serializer=message__pb2.InsertTrajectoryRequest.SerializeToString,
-        response_deserializer=message__pb2.InsertTrajectoryReply.FromString,
-        )
-    self.InsertTrajectory2 = channel.unary_unary(
-        '/message.Information/InsertTrajectory2',
-        request_serializer=message__pb2.InsertTrajectoryRequest2.SerializeToString,
+        request_serializer=message__pb2.Trajectory.SerializeToString,
         response_deserializer=message__pb2.InsertTrajectoryReply.FromString,
         )
     self.GetParams = channel.unary_unary(
@@ -47,13 +42,6 @@ class InformationServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def InsertTrajectory2(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
   def GetParams(self, request, context):
     # missing associated documentation comment in .proto file
     pass
@@ -73,12 +61,7 @@ def add_InformationServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'InsertTrajectory': grpc.unary_unary_rpc_method_handler(
           servicer.InsertTrajectory,
-          request_deserializer=message__pb2.InsertTrajectoryRequest.FromString,
-          response_serializer=message__pb2.InsertTrajectoryReply.SerializeToString,
-      ),
-      'InsertTrajectory2': grpc.unary_unary_rpc_method_handler(
-          servicer.InsertTrajectory2,
-          request_deserializer=message__pb2.InsertTrajectoryRequest2.FromString,
+          request_deserializer=message__pb2.Trajectory.FromString,
           response_serializer=message__pb2.InsertTrajectoryReply.SerializeToString,
       ),
       'GetParams': grpc.unary_unary_rpc_method_handler(

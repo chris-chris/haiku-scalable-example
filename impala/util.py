@@ -103,7 +103,7 @@ def tensor_float_decoder(tensor):
 
 
 def proto3_encoder(trajectory):
-  return message_pb2.InsertTrajectoryRequest2(
+  return message_pb2.Trajectory(
       agent_out=message_pb2.AgentOut(
           action=tensor_int(trajectory.agent_out.action),
           policy_logits=tensor_float(trajectory.agent_out.policy_logits),

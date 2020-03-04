@@ -5,19 +5,14 @@ package message;
 // The information service definition.
 service Information{
   // Sends an ID
-  // rpc InsertTrajectory (InsertTrajectoryRequest) returns (InsertTrajectoryReply) {}
-  rpc InsertTrajectory2 (InsertTrajectoryRequest2) returns (InsertTrajectoryReply) {}
+  rpc InsertTrajectory (Trajectory) returns (InsertTrajectoryReply) {}
   rpc GetParams (GetParamsRequest) returns (ModelParams) {}
   rpc Quit (QuitRequest) returns (QuitReply) {}
 }
 
-//message InsertTrajectoryRequest {
-//  string trajectory = 1;
-//}
-//
-//message InsertTrajectoryReply {
-//  string message = 1;
-//}
+message InsertTrajectoryReply {
+  string message = 1;
+}
 
 message GetParamsRequest {
 
@@ -63,14 +58,8 @@ message NamedTuple {
   repeated float TensorFloat = 1;
 }
 
-message InsertTrajectoryRequest2 {
+message Trajectory {
   AgentOut agent_out = 1;
-  TensorFloat agent_state = 2;
-  Timestep timestep = 3;
-}
-
-message InsertTrajectoryRequest3 {
-  repeated NamedTuple agent_out = 1;
   TensorFloat agent_state = 2;
   Timestep timestep = 3;
 }

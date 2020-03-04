@@ -20,41 +20,10 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='message',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\rmessage.proto\x12\x07message\"-\n\x17InsertTrajectoryRequest\x12\x12\n\ntrajectory\x18\x01 \x01(\t\"(\n\x15InsertTrajectoryReply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x12\n\x10GetParamsRequest\"\r\n\x0bQuitRequest\"\x0b\n\tQuitReply\"5\n\x0eGetParamsReply\x12\x13\n\x0b\x66rame_count\x18\x01 \x01(\x05\x12\x0e\n\x06params\x18\x02 \x01(\t\"\x83\x01\n\x08\x41gentOut\x12$\n\x06\x61\x63tion\x18\x01 \x01(\x0b\x32\x14.message.TensorInt32\x12+\n\rpolicy_logits\x18\x02 \x01(\x0b\x32\x14.message.TensorFloat\x12$\n\x06values\x18\x03 \x01(\x0b\x32\x14.message.TensorFloat\"\xac\x01\n\x08Timestep\x12&\n\x08\x64iscount\x18\x01 \x01(\x0b\x32\x14.message.TensorFloat\x12)\n\x0bobservation\x18\x02 \x01(\x0b\x32\x14.message.TensorFloat\x12$\n\x06reward\x18\x03 \x01(\x0b\x32\x14.message.TensorFloat\x12\'\n\tstep_type\x18\x04 \x01(\x0b\x32\x14.message.TensorInt32\"*\n\x0bTensorFloat\x12\x0c\n\x04\x64\x61ta\x18\x01 \x03(\x02\x12\r\n\x05shape\x18\x02 \x03(\x05\"*\n\x0bTensorInt32\x12\x0c\n\x04\x64\x61ta\x18\x01 \x03(\x02\x12\r\n\x05shape\x18\x02 \x03(\x05\"!\n\nNamedTuple\x12\x13\n\x0bTensorFloat\x18\x01 \x03(\x02\"\x90\x01\n\x18InsertTrajectoryRequest2\x12$\n\tagent_out\x18\x01 \x01(\x0b\x32\x11.message.AgentOut\x12)\n\x0b\x61gent_state\x18\x02 \x01(\x0b\x32\x14.message.TensorFloat\x12#\n\x08timestep\x18\x03 \x01(\x0b\x32\x11.message.Timestep\"\x92\x01\n\x18InsertTrajectoryRequest3\x12&\n\tagent_out\x18\x01 \x03(\x0b\x32\x13.message.NamedTuple\x12)\n\x0b\x61gent_state\x18\x02 \x01(\x0b\x32\x14.message.TensorFloat\x12#\n\x08timestep\x18\x03 \x01(\x0b\x32\x11.message.Timestep\"]\n\x0bLayerWeight\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x1f\n\x01\x62\x18\x02 \x01(\x0b\x32\x14.message.TensorFloat\x12\x1f\n\x01w\x18\x03 \x01(\x0b\x32\x14.message.TensorFloat\"H\n\x0bModelParams\x12\x13\n\x0b\x66rame_count\x18\x01 \x01(\x05\x12$\n\x06params\x18\x02 \x03(\x0b\x32\x14.message.LayerWeight2\xb3\x02\n\x0bInformation\x12V\n\x10InsertTrajectory\x12 .message.InsertTrajectoryRequest\x1a\x1e.message.InsertTrajectoryReply\"\x00\x12X\n\x11InsertTrajectory2\x12!.message.InsertTrajectoryRequest2\x1a\x1e.message.InsertTrajectoryReply\"\x00\x12>\n\tGetParams\x12\x19.message.GetParamsRequest\x1a\x14.message.ModelParams\"\x00\x12\x32\n\x04Quit\x12\x14.message.QuitRequest\x1a\x12.message.QuitReply\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\rmessage.proto\x12\x07message\"(\n\x15InsertTrajectoryReply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x12\n\x10GetParamsRequest\"\r\n\x0bQuitRequest\"\x0b\n\tQuitReply\"5\n\x0eGetParamsReply\x12\x13\n\x0b\x66rame_count\x18\x01 \x01(\x05\x12\x0e\n\x06params\x18\x02 \x01(\t\"\x83\x01\n\x08\x41gentOut\x12$\n\x06\x61\x63tion\x18\x01 \x01(\x0b\x32\x14.message.TensorInt32\x12+\n\rpolicy_logits\x18\x02 \x01(\x0b\x32\x14.message.TensorFloat\x12$\n\x06values\x18\x03 \x01(\x0b\x32\x14.message.TensorFloat\"\xac\x01\n\x08Timestep\x12&\n\x08\x64iscount\x18\x01 \x01(\x0b\x32\x14.message.TensorFloat\x12)\n\x0bobservation\x18\x02 \x01(\x0b\x32\x14.message.TensorFloat\x12$\n\x06reward\x18\x03 \x01(\x0b\x32\x14.message.TensorFloat\x12\'\n\tstep_type\x18\x04 \x01(\x0b\x32\x14.message.TensorInt32\"*\n\x0bTensorFloat\x12\x0c\n\x04\x64\x61ta\x18\x01 \x03(\x02\x12\r\n\x05shape\x18\x02 \x03(\x05\"*\n\x0bTensorInt32\x12\x0c\n\x04\x64\x61ta\x18\x01 \x03(\x02\x12\r\n\x05shape\x18\x02 \x03(\x05\"!\n\nNamedTuple\x12\x13\n\x0bTensorFloat\x18\x01 \x03(\x02\"\x82\x01\n\nTrajectory\x12$\n\tagent_out\x18\x01 \x01(\x0b\x32\x11.message.AgentOut\x12)\n\x0b\x61gent_state\x18\x02 \x01(\x0b\x32\x14.message.TensorFloat\x12#\n\x08timestep\x18\x03 \x01(\x0b\x32\x11.message.Timestep\"]\n\x0bLayerWeight\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x1f\n\x01\x62\x18\x02 \x01(\x0b\x32\x14.message.TensorFloat\x12\x1f\n\x01w\x18\x03 \x01(\x0b\x32\x14.message.TensorFloat\"H\n\x0bModelParams\x12\x13\n\x0b\x66rame_count\x18\x01 \x01(\x05\x12$\n\x06params\x18\x02 \x03(\x0b\x32\x14.message.LayerWeight2\xcc\x01\n\x0bInformation\x12I\n\x10InsertTrajectory\x12\x13.message.Trajectory\x1a\x1e.message.InsertTrajectoryReply\"\x00\x12>\n\tGetParams\x12\x19.message.GetParamsRequest\x1a\x14.message.ModelParams\"\x00\x12\x32\n\x04Quit\x12\x14.message.QuitRequest\x1a\x12.message.QuitReply\"\x00\x62\x06proto3')
 )
 
 
-
-
-_INSERTTRAJECTORYREQUEST = _descriptor.Descriptor(
-  name='InsertTrajectoryRequest',
-  full_name='message.InsertTrajectoryRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='trajectory', full_name='message.InsertTrajectoryRequest.trajectory', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=26,
-  serialized_end=71,
-)
 
 
 _INSERTTRAJECTORYREPLY = _descriptor.Descriptor(
@@ -83,8 +52,8 @@ _INSERTTRAJECTORYREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=73,
-  serialized_end=113,
+  serialized_start=26,
+  serialized_end=66,
 )
 
 
@@ -107,8 +76,8 @@ _GETPARAMSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=115,
-  serialized_end=133,
+  serialized_start=68,
+  serialized_end=86,
 )
 
 
@@ -131,8 +100,8 @@ _QUITREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=135,
-  serialized_end=148,
+  serialized_start=88,
+  serialized_end=101,
 )
 
 
@@ -155,8 +124,8 @@ _QUITREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=150,
-  serialized_end=161,
+  serialized_start=103,
+  serialized_end=114,
 )
 
 
@@ -193,8 +162,8 @@ _GETPARAMSREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=163,
-  serialized_end=216,
+  serialized_start=116,
+  serialized_end=169,
 )
 
 
@@ -238,8 +207,8 @@ _AGENTOUT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=219,
-  serialized_end=350,
+  serialized_start=172,
+  serialized_end=303,
 )
 
 
@@ -290,8 +259,8 @@ _TIMESTEP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=353,
-  serialized_end=525,
+  serialized_start=306,
+  serialized_end=478,
 )
 
 
@@ -328,8 +297,8 @@ _TENSORFLOAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=527,
-  serialized_end=569,
+  serialized_start=480,
+  serialized_end=522,
 )
 
 
@@ -366,8 +335,8 @@ _TENSORINT32 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=571,
-  serialized_end=613,
+  serialized_start=524,
+  serialized_end=566,
 )
 
 
@@ -397,34 +366,34 @@ _NAMEDTUPLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=615,
-  serialized_end=648,
+  serialized_start=568,
+  serialized_end=601,
 )
 
 
-_INSERTTRAJECTORYREQUEST2 = _descriptor.Descriptor(
-  name='InsertTrajectoryRequest2',
-  full_name='message.InsertTrajectoryRequest2',
+_TRAJECTORY = _descriptor.Descriptor(
+  name='Trajectory',
+  full_name='message.Trajectory',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='agent_out', full_name='message.InsertTrajectoryRequest2.agent_out', index=0,
+      name='agent_out', full_name='message.Trajectory.agent_out', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='agent_state', full_name='message.InsertTrajectoryRequest2.agent_state', index=1,
+      name='agent_state', full_name='message.Trajectory.agent_state', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='timestep', full_name='message.InsertTrajectoryRequest2.timestep', index=2,
+      name='timestep', full_name='message.Trajectory.timestep', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -442,53 +411,8 @@ _INSERTTRAJECTORYREQUEST2 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=651,
-  serialized_end=795,
-)
-
-
-_INSERTTRAJECTORYREQUEST3 = _descriptor.Descriptor(
-  name='InsertTrajectoryRequest3',
-  full_name='message.InsertTrajectoryRequest3',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='agent_out', full_name='message.InsertTrajectoryRequest3.agent_out', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='agent_state', full_name='message.InsertTrajectoryRequest3.agent_state', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='timestep', full_name='message.InsertTrajectoryRequest3.timestep', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=798,
-  serialized_end=944,
+  serialized_start=604,
+  serialized_end=734,
 )
 
 
@@ -532,8 +456,8 @@ _LAYERWEIGHT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=946,
-  serialized_end=1039,
+  serialized_start=736,
+  serialized_end=829,
 )
 
 
@@ -570,8 +494,8 @@ _MODELPARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1041,
-  serialized_end=1113,
+  serialized_start=831,
+  serialized_end=903,
 )
 
 _AGENTOUT.fields_by_name['action'].message_type = _TENSORINT32
@@ -581,16 +505,12 @@ _TIMESTEP.fields_by_name['discount'].message_type = _TENSORFLOAT
 _TIMESTEP.fields_by_name['observation'].message_type = _TENSORFLOAT
 _TIMESTEP.fields_by_name['reward'].message_type = _TENSORFLOAT
 _TIMESTEP.fields_by_name['step_type'].message_type = _TENSORINT32
-_INSERTTRAJECTORYREQUEST2.fields_by_name['agent_out'].message_type = _AGENTOUT
-_INSERTTRAJECTORYREQUEST2.fields_by_name['agent_state'].message_type = _TENSORFLOAT
-_INSERTTRAJECTORYREQUEST2.fields_by_name['timestep'].message_type = _TIMESTEP
-_INSERTTRAJECTORYREQUEST3.fields_by_name['agent_out'].message_type = _NAMEDTUPLE
-_INSERTTRAJECTORYREQUEST3.fields_by_name['agent_state'].message_type = _TENSORFLOAT
-_INSERTTRAJECTORYREQUEST3.fields_by_name['timestep'].message_type = _TIMESTEP
+_TRAJECTORY.fields_by_name['agent_out'].message_type = _AGENTOUT
+_TRAJECTORY.fields_by_name['agent_state'].message_type = _TENSORFLOAT
+_TRAJECTORY.fields_by_name['timestep'].message_type = _TIMESTEP
 _LAYERWEIGHT.fields_by_name['b'].message_type = _TENSORFLOAT
 _LAYERWEIGHT.fields_by_name['w'].message_type = _TENSORFLOAT
 _MODELPARAMS.fields_by_name['params'].message_type = _LAYERWEIGHT
-DESCRIPTOR.message_types_by_name['InsertTrajectoryRequest'] = _INSERTTRAJECTORYREQUEST
 DESCRIPTOR.message_types_by_name['InsertTrajectoryReply'] = _INSERTTRAJECTORYREPLY
 DESCRIPTOR.message_types_by_name['GetParamsRequest'] = _GETPARAMSREQUEST
 DESCRIPTOR.message_types_by_name['QuitRequest'] = _QUITREQUEST
@@ -601,18 +521,10 @@ DESCRIPTOR.message_types_by_name['Timestep'] = _TIMESTEP
 DESCRIPTOR.message_types_by_name['TensorFloat'] = _TENSORFLOAT
 DESCRIPTOR.message_types_by_name['TensorInt32'] = _TENSORINT32
 DESCRIPTOR.message_types_by_name['NamedTuple'] = _NAMEDTUPLE
-DESCRIPTOR.message_types_by_name['InsertTrajectoryRequest2'] = _INSERTTRAJECTORYREQUEST2
-DESCRIPTOR.message_types_by_name['InsertTrajectoryRequest3'] = _INSERTTRAJECTORYREQUEST3
+DESCRIPTOR.message_types_by_name['Trajectory'] = _TRAJECTORY
 DESCRIPTOR.message_types_by_name['LayerWeight'] = _LAYERWEIGHT
 DESCRIPTOR.message_types_by_name['ModelParams'] = _MODELPARAMS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-InsertTrajectoryRequest = _reflection.GeneratedProtocolMessageType('InsertTrajectoryRequest', (_message.Message,), {
-  'DESCRIPTOR' : _INSERTTRAJECTORYREQUEST,
-  '__module__' : 'message_pb2'
-  # @@protoc_insertion_point(class_scope:message.InsertTrajectoryRequest)
-  })
-_sym_db.RegisterMessage(InsertTrajectoryRequest)
 
 InsertTrajectoryReply = _reflection.GeneratedProtocolMessageType('InsertTrajectoryReply', (_message.Message,), {
   'DESCRIPTOR' : _INSERTTRAJECTORYREPLY,
@@ -684,19 +596,12 @@ NamedTuple = _reflection.GeneratedProtocolMessageType('NamedTuple', (_message.Me
   })
 _sym_db.RegisterMessage(NamedTuple)
 
-InsertTrajectoryRequest2 = _reflection.GeneratedProtocolMessageType('InsertTrajectoryRequest2', (_message.Message,), {
-  'DESCRIPTOR' : _INSERTTRAJECTORYREQUEST2,
+Trajectory = _reflection.GeneratedProtocolMessageType('Trajectory', (_message.Message,), {
+  'DESCRIPTOR' : _TRAJECTORY,
   '__module__' : 'message_pb2'
-  # @@protoc_insertion_point(class_scope:message.InsertTrajectoryRequest2)
+  # @@protoc_insertion_point(class_scope:message.Trajectory)
   })
-_sym_db.RegisterMessage(InsertTrajectoryRequest2)
-
-InsertTrajectoryRequest3 = _reflection.GeneratedProtocolMessageType('InsertTrajectoryRequest3', (_message.Message,), {
-  'DESCRIPTOR' : _INSERTTRAJECTORYREQUEST3,
-  '__module__' : 'message_pb2'
-  # @@protoc_insertion_point(class_scope:message.InsertTrajectoryRequest3)
-  })
-_sym_db.RegisterMessage(InsertTrajectoryRequest3)
+_sym_db.RegisterMessage(Trajectory)
 
 LayerWeight = _reflection.GeneratedProtocolMessageType('LayerWeight', (_message.Message,), {
   'DESCRIPTOR' : _LAYERWEIGHT,
@@ -720,31 +625,22 @@ _INFORMATION = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1116,
-  serialized_end=1423,
+  serialized_start=906,
+  serialized_end=1110,
   methods=[
   _descriptor.MethodDescriptor(
     name='InsertTrajectory',
     full_name='message.Information.InsertTrajectory',
     index=0,
     containing_service=None,
-    input_type=_INSERTTRAJECTORYREQUEST,
-    output_type=_INSERTTRAJECTORYREPLY,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='InsertTrajectory2',
-    full_name='message.Information.InsertTrajectory2',
-    index=1,
-    containing_service=None,
-    input_type=_INSERTTRAJECTORYREQUEST2,
+    input_type=_TRAJECTORY,
     output_type=_INSERTTRAJECTORYREPLY,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='GetParams',
     full_name='message.Information.GetParams',
-    index=2,
+    index=1,
     containing_service=None,
     input_type=_GETPARAMSREQUEST,
     output_type=_MODELPARAMS,
@@ -753,7 +649,7 @@ _INFORMATION = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Quit',
     full_name='message.Information.Quit',
-    index=3,
+    index=2,
     containing_service=None,
     input_type=_QUITREQUEST,
     output_type=_QUITREPLY,

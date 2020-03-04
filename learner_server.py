@@ -46,7 +46,7 @@ class Information(message_pb2_grpc.InformationServicer):
   def __init__(self, learner):
     self.learner = learner
 
-  def InsertTrajectory2(self, request, context):
+  def InsertTrajectory(self, request, context):
     traj = util.proto3_decoder(request)
     self.learner.enqueue_traj(traj)
     return message_pb2.InsertTrajectoryReply(message='Inserted!')

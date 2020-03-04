@@ -51,7 +51,7 @@ def run_actor(actor: actor_lib.Actor):
     frame_count, params = util.proto3_weight_decoder(model_params=param_result)
 
     trajectories = actor.unroll_and_push(frame_count, params)
-    stub.InsertTrajectory2(
+    stub.InsertTrajectory(
         util.proto3_encoder(trajectories))
 
 def setup_actors(num_actors):
