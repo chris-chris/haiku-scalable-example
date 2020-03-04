@@ -49,7 +49,7 @@ class CatchTest(absltest.TestCase):
 
     proto_trajectory = util.proto3_encoder(trajectory)
     self.assertIsInstance(proto_trajectory,
-                          message_pb2.InsertTrajectoryRequest2)
+                          message_pb2.Trajectory)
 
     decoded_trajectory = util.proto3_decoder(proto_trajectory)
     np.testing.assert_almost_equal(trajectory.agent_state,
