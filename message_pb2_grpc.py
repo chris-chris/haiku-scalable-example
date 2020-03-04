@@ -16,13 +16,13 @@ class InformationStub(object):
     """
     self.InsertTrajectory = channel.unary_unary(
         '/message.Information/InsertTrajectory',
-        request_serializer=message__pb2.InsertTrajectoryRequest.SerializeToString,
+        request_serializer=message__pb2.Trajectory.SerializeToString,
         response_deserializer=message__pb2.InsertTrajectoryReply.FromString,
         )
     self.GetParams = channel.unary_unary(
         '/message.Information/GetParams',
         request_serializer=message__pb2.GetParamsRequest.SerializeToString,
-        response_deserializer=message__pb2.GetParamsReply.FromString,
+        response_deserializer=message__pb2.ModelParams.FromString,
         )
     self.Quit = channel.unary_unary(
         '/message.Information/Quit',
@@ -61,13 +61,13 @@ def add_InformationServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'InsertTrajectory': grpc.unary_unary_rpc_method_handler(
           servicer.InsertTrajectory,
-          request_deserializer=message__pb2.InsertTrajectoryRequest.FromString,
+          request_deserializer=message__pb2.Trajectory.FromString,
           response_serializer=message__pb2.InsertTrajectoryReply.SerializeToString,
       ),
       'GetParams': grpc.unary_unary_rpc_method_handler(
           servicer.GetParams,
           request_deserializer=message__pb2.GetParamsRequest.FromString,
-          response_serializer=message__pb2.GetParamsReply.SerializeToString,
+          response_serializer=message__pb2.ModelParams.SerializeToString,
       ),
       'Quit': grpc.unary_unary_rpc_method_handler(
           servicer.Quit,
