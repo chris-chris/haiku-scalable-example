@@ -87,8 +87,8 @@ $ kubectl logs -f impala actor
 - [x] v1. 1 Learner + Multi Actor IMPALA wiring through gRPC.
 - [x] v2. 1 Learner + Multi Actor IMPALA wiring through gRPC on docker VMs.
 - [x] v3. 1 Learner + Multi Actor IMPALA wiring through gRPC on k8s.
+- [x] Optimize the model weight serialization for the performance.
 - [ ] v4. Multi Learner + Multi Actor IMPALA wiring through gRPC on k8s.
-- [ ] Optimize the model weight serialization for the performance.
 - [ ] Implement other distributed RL algorithms
 - [ ] Asynchronous Processing via Queue
 - [ ] Monitor the computing resource usages 
