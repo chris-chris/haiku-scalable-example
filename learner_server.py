@@ -17,15 +17,11 @@
 
 from concurrent import futures
 import time
-import json
 
 import grpc
-import dm_env
 from absl import app
-import numpy as np
 import jax
 from jax.experimental import optix
-from haiku._src.data_structures import to_mutable_dict
 from bsuite.experiments.catch import catch
 
 from impala import agent as agent_lib

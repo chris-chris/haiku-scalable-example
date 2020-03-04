@@ -77,7 +77,7 @@ def setup_actors(num_actors):
         rng_seed=i,
         logger=util.AbslLogger(),  # Provide your own logger here.
     )
-    args = (actor, )
+    args = (actor,)
     actor_threads.append(threading.Thread(target=run_actor, args=args))
   return actor_threads
 
