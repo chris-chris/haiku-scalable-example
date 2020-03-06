@@ -14,6 +14,7 @@ Implement scalable reinforcement learning agent on the container orchestraion sy
 
 ## 3. Reinforcement Learning Algorithms
 - [x] IMPALA
+- [ ] A3C
 - [ ] TBD
 
 ## 4. Architecture
