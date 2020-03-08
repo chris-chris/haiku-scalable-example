@@ -9,7 +9,6 @@ Implement scalable reinforcement learning agent on the container orchestraion sy
 
 ## 2. Container Orchestraion
 - [x] Kubernetes
-- [ ] Slurm
 - [ ] Google Cloud Platform
 
 ## 3. Reinforcement Learning Algorithms
