@@ -1,11 +1,9 @@
 """Util test."""
 from absl.testing import absltest
 from bsuite.experiments.catch import catch
-import dm_env
 import jax
-import mock
-import numpy as np
 from jax.experimental import optix
+import numpy as np
 
 from impala import actor as actor_lib
 from impala import agent as agent_lib
