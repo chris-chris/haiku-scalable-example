@@ -45,3 +45,19 @@ class Worker(threading.Thread):
     self.save_dir = save_dir
     self.ep_loss = 0.0
 '''
+
+class Memory:
+  def __init__(self):
+    self.states = []
+    self.actions = []
+    self.rewards = []
+    
+  def store(self, state, action, reward):
+    self.states.append(state)
+    self.actions.append(action)
+    self.rewards.append(reward)
+    
+  def clear(self):
+    self.states = []
+    self.actions = []
+    self.rewards = []
