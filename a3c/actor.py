@@ -22,7 +22,7 @@ class ActorCriticModel:
     actor = hk.Sequential([
         hk.Flatten(),
         hk.Linear(100), jax.nn.relu,
-        hk.Linear(self.action_size),
+        hk.Linear(self.action_size), jax.nn.softmax,
     ])
     return actor(x)
 
