@@ -1,4 +1,9 @@
-'''
+import gym
+
+from threading import Thread, Lock
+from actor import ActorCriticModel
+
+
 class Memory:
   def __init__(self):
     self.states = []
@@ -15,14 +20,11 @@ class Memory:
     self.actions = []
     self.rewards = []
 
-class Worker(threading.Thread):
-  # Set up global variables across different threads
+class Worker(Thread):
   global_episode = 0
-  # Moving average reward
   global_moving_average_reward = 0
   best_score = 0
-  save_lock = threading.Lock()
-
+  save_lock = Lock()
   def __init__(self,
                state_size,
                action_size,
@@ -44,20 +46,3 @@ class Worker(threading.Thread):
     self.env = gym.make(self.game_name).unwrapped
     self.save_dir = save_dir
     self.ep_loss = 0.0
-'''
-
-class Memory:
-  def __init__(self):
-    self.states = []
-    self.actions = []
-    self.rewards = []
-    
-  def store(self, state, action, reward):
-    self.states.append(state)
-    self.actions.append(action)
-    self.rewards.append(reward)
-    
-  def clear(self):
-    self.states = []
-    self.actions = []
-    self.rewards = []
