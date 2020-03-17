@@ -1,21 +1,31 @@
-# Lint as: python3
+import haiku as hk
+import jax
+import jax.numpy as jnp
 
-'''
-class ActorCriticModel(keras.Model):
+class ActorCriticModel:
   def __init__(self, state_size, action_size):
-    super(ActorCriticModel, self).__init__()
     self.state_size = state_size
     self.action_size = action_size
-    self.dense1 = layers.Dense(100, activation='relu')
-    self.policy_logits = layers.Dense(action_size)
-    self.dense2 = layers.Dense(100, activation='relu')
-    self.values = layers.Dense(1)
+    self.actor = hk.transform(self.actor_fn)
+    self.critic = hk.transform(self.critic_fn)
 
-  def call(self, inputs):
-    # Forward pass
-    x = self.dense1(inputs)
-    logits = self.policy_logits(x)
-    v1 = self.dense2(inputs)
-    values = self.values(v1)
-    return logits, values
-'''
+  
+  def actor_fn(self, batch):
+    x = batch.astype(jnp.float32)
+    actor = hk.Sequential([
+        hk.Flatten(),
+        hk.Linear(100), jax.nn.relu,
+        hk.Linear(self.action_size),
+    ])
+    return actor(x)
+
+  def critic_fn(self, batch):
+    x = batch.astype(jnp.float32)
+    critic = hk.Sequential([
+        hk.Flatten(),
+        hk.Linear(100), jax.nn.relu,
+        hk.Linear(self.action_size),
+    ])
+    return critic(x)
+  
+    
