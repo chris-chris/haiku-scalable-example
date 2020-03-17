@@ -102,3 +102,5 @@ I used Deepmind's open sources [haiku](https://github.com/deepmind/dm-haiku), [r
 - https://github.com/deepmind/haiku
 - https://github.com/kubernetes/kubernetes
 - https://github.com/kent-williams/grpc-python-kubernetes
+- https://github.com/simondlevy/OpenAI-Gym-Hacks/
+- https://blog.tensorflow.org/2018/07/deep-reinforcement-learning-keras-eager-execution.html
