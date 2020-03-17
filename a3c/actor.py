@@ -8,7 +8,14 @@ class ActorCriticModel:
     self.action_size = action_size
     self.actor = hk.transform(self.actor_fn)
     self.critic = hk.transform(self.critic_fn)
+    self.actor_param = self.actor.init(jax.PRNGKey(42), pass) # TODO data input
+    self.critic_param = self.critic.init(jax.PRNGKey(42), pass)
 
+  def pi(self, states):
+    return self.actor.apply(self.actor_param, states)
+  
+  def v(self, states):
+    return self.critic.apply(self.critic_param, states)
   
   def actor_fn(self, batch):
     x = batch.astype(jnp.float32)
@@ -29,3 +36,8 @@ class ActorCriticModel:
     return critic(x)
   
     
+  def get_actor_param(self):
+    return self.actor_param
+
+  def get_critic_param(self):
+    return self.critic_param
